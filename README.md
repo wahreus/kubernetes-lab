@@ -4,7 +4,15 @@ A Kubernetes practice repo built in preparation for the Certified Kubernetes Adm
 
 ## Environment setup
 
-The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes control plane and a worker node. Terraform defines the AWS infrastructure, while the helper scripts handle setup and teardown.
+The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes control-plane node and worker node. Terraform defines the AWS infrastructure, while the helper scripts handle the setup and teardown workflow.
 
 - `build_lab.sh` provisions the AWS resources with Terraform, prepares SSH access, and opens terminals to the nodes.
 - `destroy_lab.sh` removes the AWS resources and cleans up local connection files.
+
+A diagram of the environment setup is shown in Figure 1.
+
+<p align="center">
+  <img src="figures/environment_setup_diagram.svg" alt="Diagram showing local kubectl connecting over SSH to two AWS EC2 instances used as Kubernetes nodes.">
+  <br>
+  <em>Figure 1: Environment setup.</em>
+</p>
