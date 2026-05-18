@@ -22,7 +22,6 @@ The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes co
 > Please note that EC2 instances incur hourly costs. Always run `destroy_lab.sh` when you are finished with a practice session to avoid unnecessary charges.
 
 ### Requirements
-**Requirements**
 
 - AWS account with EC2 and VPC permissions.
 - AWS CLI configured.
