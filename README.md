@@ -2,6 +2,11 @@
 
 A Kubernetes practice repo built in preparation for the Certified Kubernetes Administrator (CKA) exam, focused on workloads, networking, storage, RBAC, scheduling, and troubleshooting.
 
+It currently contains two practice components:
+
+- An EC2-based Kubernetes lab environment for hands-on practice
+- KubeRun, a command-speed practice game
+
 ## Environment setup
 
 <p align="center">
@@ -19,7 +24,7 @@ The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes co
 - Removes the AWS resources.
 - Cleans up local connection files.
 
-> Please note that EC2 instances incur hourly costs. Always run `destroy_lab.sh` when you are finished with a practice session to avoid unnecessary charges.
+> **Note:** EC2 instances incur hourly costs. Always run `destroy_lab.sh` when you are finished with a practice session to avoid unnecessary charges.
 
 ### Requirements
 
@@ -28,3 +33,26 @@ The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes co
 - Terraform installed.
 - Ed25519 SSH key pair available for EC2 access.
 - `kubectl` installed.
+
+## KubeRun: A Command-Speed Practice Game
+
+KubeRun is a command-speed game for Kubernetes and CKA practice. It helps you build speed with common `kubectl` and `kubeadm` commands for administration, troubleshooting, node maintenance, RBAC checks, and cluster setup.
+
+You are shown task descriptions in a randomized order, and the goal is to type as many correct commands as possible within 3 minutes. No commands are executed, KubeRun is only for practice. The game covers 20 common Kubernetes and CKA-style commands for:
+
+- inspecting and troubleshooting resources
+- applying and editing resources
+- managing deployments
+- opening shell sessions in pods
+- switching contexts
+- checking permissions
+- maintaining nodes with drain, cordon, uncordon, and taints
+- managing cluster lifecycle with `kubeadm`
+
+
+> **Disclaimer:** KubeRun is an independently developed practice tool and is not affiliated with CNCF, The Linux Foundation, or the Kubernetes project. It is intended for command-recall practice only and does not cover the full CKA curriculum.
+
+### Requirements
+
+- Python 3
+- macOS/Linux terminal
