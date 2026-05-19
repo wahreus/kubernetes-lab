@@ -16,23 +16,23 @@ It currently contains two practice components:
 The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes control plane node and worker node. Terraform defines the AWS infrastructure, while the helper scripts handle the setup and teardown workflow. The scripts intentionally omit Kubernetes installation steps to support cluster setup practice.
 
 `build_lab.sh`
-- Provisions the AWS resources with Terraform.
-- Prepares SSH access.
-- Opens terminals to the nodes.
+- Provisions the AWS resources with Terraform
+- Prepares SSH access
+- Opens terminals to the nodes
 
 `destroy_lab.sh`
-- Removes the AWS resources.
-- Cleans up local connection files.
+- Removes the AWS resources
+- Cleans up local connection files
 
 > **Note:** EC2 instances incur hourly costs. Always run `destroy_lab.sh` when you are finished with a practice session to avoid unnecessary charges.
 
 ### Requirements
 
-- AWS account with EC2 and VPC permissions.
-- AWS CLI configured.
-- Terraform installed.
-- Ed25519 SSH key pair available for EC2 access.
-- `kubectl` installed.
+- AWS account with EC2 and VPC permissions
+- AWS CLI configured
+- Terraform installed
+- Ed25519 SSH key pair available for EC2 access
+- `kubectl` installed
 
 ## KubeRun: A Command-Speed Practice Game
 
