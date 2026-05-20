@@ -34,7 +34,7 @@ The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes co
 - Ed25519 SSH key pair available for EC2 access
 - `kubectl` installed
 
-## KubeRun: A Command-Speed Practice Game
+## KubeRun
 
 KubeRun is a command-speed game for Kubernetes and CKA practice. It helps you build speed with common `kubectl` and `kubeadm` commands for administration, troubleshooting, node maintenance, RBAC checks, and cluster setup.
 
