@@ -10,10 +10,16 @@ variable "name_prefix" {
   default     = "k8s-lab"
 }
 
-variable "instance_type" {
-  description = "EC2 instance type for both Kubernetes lab nodes."
+variable "control_plane_instance_type" {
+  description = "EC2 instance type for the Kubernetes control plane node."
   type        = string
   default     = "t3.medium"
+}
+
+variable "worker_instance_type" {
+  description = "EC2 instance type for each Kubernetes worker node."
+  type        = string
+  default     = "t3.small"
 }
 
 variable "public_key_path" {

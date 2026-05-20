@@ -14,12 +14,32 @@ provider "aws" {
 locals {
   nodes = {
     "control-plane" = {
-      role = "control-plane"
+      role          = "control-plane"
+      instance_type = var.control_plane_instance_type
     }
-    worker = {
-      role = "worker"
+    "worker-a" = {
+      role          = "worker"
+      instance_type = var.worker_instance_type
+    }
+    "worker-b" = {
+      role          = "worker"
+      instance_type = var.worker_instance_type
     }
   }
+}
+
+
+# -----------------------------------------------------------------------------
+# State migration
+# -----------------------------------------------------------------------------
+# Keeps the previous single worker instance when upgrading from the old
+# two-node lab. Terraform will treat aws_instance.node["worker"] as
+# aws_instance.node["worker-a"] instead of destroying it only because the
+# name changed.
+
+moved {
+  from = aws_instance.node["worker"]
+  to   = aws_instance.node["worker-a"]
 }
 
 
@@ -128,7 +148,7 @@ resource "aws_security_group" "lab" {
   }
 
   ingress {
-    description = "All traffic between lab nodes"
+    description = "All control, pod, and service traffic between lab nodes"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -171,7 +191,7 @@ resource "aws_instance" "node" {
   for_each = local.nodes
 
   ami                         = data.aws_ami.ubuntu.id
-  instance_type               = var.instance_type
+  instance_type               = each.value.instance_type
   subnet_id                   = aws_subnet.public.id
   vpc_security_group_ids      = [aws_security_group.lab.id]
   key_name                    = aws_key_pair.lab.key_name
