@@ -1,6 +1,8 @@
 .terraform/
 *.tfstate
 *.tfstate.*
+terraform.tfstate.d/
+
 crash.log
 crash.*.log
 
@@ -9,10 +11,28 @@ crash.*.log
 *.tfplan
 tfplan
 
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
 ssh_config
 lab_hosts.txt
+.known_hosts
+known_hosts
+
+kubeconfig
+*.kubeconfig
+admin.conf
 
 *.pem
 *.key
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+.env
+.env.*
 
 .DS_Store
