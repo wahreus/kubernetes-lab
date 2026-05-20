@@ -31,7 +31,11 @@ variable "public_key_path" {
 variable "allowed_ssh_cidr" {
   description = "CIDR allowed to SSH to the nodes and reach the Kubernetes API/NodePorts. Prefer your public IP as x.x.x.x/32."
   type        = string
-  default     = "0.0.0.0/0"
+  nullable    = false
+  validation {
+    condition     = can(cidrhost(var.allowed_ssh_cidr, 0))
+    error_message = "allowed_ssh_cidr must be a valid CIDR block, for example 203.0.113.10/32."
+  }
 }
 
 variable "root_volume_size" {
