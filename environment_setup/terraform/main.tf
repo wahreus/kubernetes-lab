@@ -197,13 +197,80 @@ resource "aws_instance" "node" {
   key_name                    = aws_key_pair.lab.key_name
   associate_public_ip_address = true
 
+    user_data_replace_on_change = true
+
   user_data = <<-EOF
-    #!/usr/bin/env bash
-    set -eux
-    hostnamectl set-hostname ${each.key}
-    apt-get update -y
-    apt-get install -y curl ca-certificates gnupg lsb-release apt-transport-https
-  EOF
+#!/usr/bin/env bash
+set -euxo pipefail
+
+hostnamectl set-hostname ${each.key}
+
+apt-get update -y
+apt-get install -y \
+  ca-certificates \
+  curl \
+  gnupg \
+  lsb-release \
+  apt-transport-https \
+  tar
+
+cat >/etc/modules-load.d/k8s.conf <<'MODULES'
+overlay
+br_netfilter
+MODULES
+
+modprobe overlay
+modprobe br_netfilter
+
+cat >/etc/sysctl.d/k8s.conf <<'SYSCTL'
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+SYSCTL
+
+sysctl --system
+
+install -m 0755 -d /etc/apt/keyrings
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  -o /etc/apt/keyrings/docker.asc
+
+chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+  >/etc/apt/sources.list.d/docker.list
+
+apt-get update -y
+apt-get install -y containerd.io
+
+mkdir -p /etc/containerd
+containerd config default >/etc/containerd/config.toml
+
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+
+systemctl enable --now containerd
+systemctl restart containerd
+
+CRICTL_VERSION="v1.36.0"
+
+curl -fsSLo /tmp/crictl.tar.gz \
+  "https://github.com/kubernetes-sigs/cri-tools/releases/download/$CRICTL_VERSION/crictl-$CRICTL_VERSION-linux-amd64.tar.gz"
+
+tar -C /usr/local/bin -xzf /tmp/crictl.tar.gz
+rm -f /tmp/crictl.tar.gz
+
+cat >/etc/crictl.yaml <<'CRICTL_CONFIG'
+runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+timeout: 10
+debug: false
+CRICTL_CONFIG
+
+containerd --version
+crictl --version
+crictl info
+EOF
 
   root_block_device {
     volume_size = var.root_volume_size
