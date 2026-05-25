@@ -1,0 +1,82 @@
+[
+    {
+        "prompt": "List all pods in the production namespace with extra node/IP details.",
+        "answer": "kubectl get pods -n production -o wide"
+    },
+    {
+        "prompt": "Show detailed troubleshooting information for pod api-7d9f8c9b6f-2kq4m in namespace backend.",
+        "answer": "kubectl describe pod api-7d9f8c9b6f-2kq4m -n backend"
+    },
+    {
+        "prompt": "Create or update resources from the manifest file manifests/nginx-deployment.yaml.",
+        "answer": "kubectl apply -f manifests/nginx-deployment.yaml"
+    },
+    {
+        "prompt": "Create a deployment named web using the nginx:1.27 image.",
+        "answer": "kubectl create deployment web --image=nginx:1.27"
+    },
+    {
+        "prompt": "Open deployment frontend in namespace production for direct editing.",
+        "answer": "kubectl edit deployment frontend -n production"
+    },
+    {
+        "prompt": "Show logs from pod web-6c8f7d9f5b-mq2xz in namespace frontend.",
+        "answer": "kubectl logs web-6c8f7d9f5b-mq2xz -n frontend"
+    },
+    {
+        "prompt": "Start an interactive shell inside pod debug-shell in namespace tools.",
+        "answer": "kubectl exec -it debug-shell -n tools -- sh"
+    },
+    {
+        "prompt": "Switch your current kubeconfig context to dev-cluster.",
+        "answer": "kubectl config use-context dev-cluster"
+    },
+    {
+        "prompt": "Show documentation for container resource requests and limits.",
+        "answer": "kubectl explain pod.spec.containers.resources"
+    },
+    {
+        "prompt": "Delete pod crashloop-demo in namespace troubleshooting.",
+        "answer": "kubectl delete pod crashloop-demo -n troubleshooting"
+    },
+    {
+        "prompt": "Prepare node worker-2 for maintenance by safely evicting workloads.",
+        "answer": "kubectl drain worker-2 --ignore-daemonsets --delete-emptydir-data"
+    },
+    {
+        "prompt": "Mark node worker-3 so no new pods are scheduled there.",
+        "answer": "kubectl cordon worker-3"
+    },
+    {
+        "prompt": "Mark node worker-3 as schedulable again.",
+        "answer": "kubectl uncordon worker-3"
+    },
+    {
+        "prompt": "Prevent regular pods from scheduling on worker-1 unless they tolerate the dedicated=infra restriction.",
+        "answer": "kubectl taint nodes worker-1 dedicated=infra:NoSchedule"
+    },
+    {
+        "prompt": "Check whether you are allowed to create deployments in the production namespace.",
+        "answer": "kubectl auth can-i create deployments -n production"
+    },
+    {
+        "prompt": "Initialize a control-plane node using 10.244.0.0/16 as the pod network range.",
+        "answer": "sudo kubeadm init --pod-network-cidr=10.244.0.0/16"
+    },
+    {
+        "prompt": "Reset kubeadm state on a node.",
+        "answer": "sudo kubeadm reset"
+    },
+    {
+        "prompt": "Generate a fresh full worker-node join command.",
+        "answer": "kubeadm token create --print-join-command"
+    },
+    {
+        "prompt": "Show the available upgrade versions for a kubeadm-managed cluster.",
+        "answer": "sudo kubeadm upgrade plan"
+    },
+    {
+        "prompt": "Upgrade the control plane to version v1.34.1.",
+        "answer": "sudo kubeadm upgrade apply v1.34.1"
+    }
+]
