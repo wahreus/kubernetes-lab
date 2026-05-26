@@ -78,5 +78,65 @@
     {
         "prompt": "Upgrade the control plane to version v1.34.1.",
         "answer": "sudo kubeadm upgrade apply v1.34.1"
+    },
+    {
+        "prompt": "Create a namespace named monitoring.",
+        "answer": "kubectl create namespace monitoring"
+    },
+    {
+        "prompt": "Scale deployment web in namespace frontend to 4 replicas.",
+        "answer": "kubectl scale deployment web -n frontend --replicas=4"
+    },
+    {
+        "prompt": "Show rollout status for deployment web in namespace frontend.",
+        "answer": "kubectl rollout status deployment/web -n frontend"
+    },
+    {
+        "prompt": "Undo the last rollout of deployment web in namespace frontend.",
+        "answer": "kubectl rollout undo deployment/web -n frontend"
+    },
+    {
+        "prompt": "Expose deployment web as a ClusterIP service named web-svc on port 80.",
+        "answer": "kubectl expose deployment web --name=web-svc --port=80 --type=ClusterIP"
+    },
+    {
+        "prompt": "List all services in namespace production.",
+        "answer": "kubectl get services -n production"
+    },
+    {
+        "prompt": "Show endpoints for service web-svc in namespace frontend.",
+        "answer": "kubectl get endpoints web-svc -n frontend"
+    },
+    {
+        "prompt": "Create configmap app-config from file app.properties.",
+        "answer": "kubectl create configmap app-config --from-file=app.properties"
+    },
+    {
+        "prompt": "Create secret db-secret with literal username=admin.",
+        "answer": "kubectl create secret generic db-secret --from-literal=username=admin"
+    },
+    {
+        "prompt": "List all PVCs in namespace database.",
+        "answer": "kubectl get persistentvolumeclaims -n database"
+    },
+    {
+        "prompt": "Show details for PVC data-pvc in namespace database.",
+        "answer": "kubectl describe pvc data-pvc -n database"
+    },
+    {
+        "prompt": "List all storage classes.",
+        "answer": "kubectl get storageclasses"
+    },
+    {
+        "prompt": "Create service account deployer in namespace ci.",
+        "answer": "kubectl create serviceaccount deployer -n ci"
+    },
+    {
+        "prompt": "Add label disk=ssd to node worker-1.",
+        "answer": "kubectl label node worker-1 disk=ssd"
+    },
+    {
+        "prompt": "List all events across all namespaces sorted by creation time.",
+        "answer": "kubectl get events -A --sort-by=.metadata.creationTimestamp"
     }
 ]
