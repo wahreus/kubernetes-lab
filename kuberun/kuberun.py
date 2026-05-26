@@ -7,10 +7,10 @@ import time
 
 
 INTRO_WIDTH = 68
-TIME_LIMIT_SECONDS = 180
 TASKS_PATH = Path(__file__).with_name("tasks.json")
 with TASKS_PATH.open(encoding="utf-8") as file:
     COMMANDS = json.load(file)
+TIME_LIMIT_SECONDS = len(COMMANDS)*10
 
 
 class TimeExpired(Exception):
@@ -62,7 +62,7 @@ def main() -> None:
             )
             + "\n\n"
             + wrap(
-                f"For {TIME_LIMIT_SECONDS // 60} minutes, you will be shown task descriptions. "
+                f"For {TIME_LIMIT_SECONDS//60} minutes, you will be shown task descriptions. "
                 "Your job is to type the correct command that matches each task. "
                 "The goal of the game is to type as many correct commands as possible. "
                 "The commands are not executed, this is only typing practice."
