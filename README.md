@@ -39,7 +39,7 @@ The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes co
 
 KubeRun is a command-speed game for Kubernetes and CKA practice. It helps you build speed with common `kubectl` and `kubeadm` commands for administration, troubleshooting, node maintenance, RBAC checks, and cluster setup.
 
-You are shown task descriptions in a randomized order, and the goal is to type as many correct commands as possible within 3 minutes. No commands are executed, KubeRun is only for practice. The game covers 35 common Kubernetes and CKA-style commands for:
+You are shown task descriptions in a randomized order, and the goal is to type as many correct commands as possible within 5 minutes. No commands are executed, KubeRun is only for practice. The game covers 35 common Kubernetes and CKA-style commands for:
 
 - inspecting and troubleshooting resources
 - applying and editing resources
