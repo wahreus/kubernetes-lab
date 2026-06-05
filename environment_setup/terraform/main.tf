@@ -182,8 +182,7 @@ resource "aws_instance" "node" {
   vpc_security_group_ids      = [aws_security_group.lab.id]
   key_name                    = aws_key_pair.lab.key_name
   associate_public_ip_address = true
-
-    user_data_replace_on_change = true
+  user_data_replace_on_change = true
 
   user_data = <<-EOF
 #!/usr/bin/env bash
@@ -195,7 +194,7 @@ apt-get update -y
 apt-get install -y \
   ca-certificates \
   curl \
-  gnupg \
+  gpg \
   lsb-release \
   apt-transport-https \
   tar
@@ -239,6 +238,7 @@ systemctl enable --now containerd
 systemctl restart containerd
 
 CRICTL_VERSION="v1.36.0"
+KUBERNETES_MINOR_VERSION="v1.36"
 
 curl -fsSLo /tmp/crictl.tar.gz \
   "https://github.com/kubernetes-sigs/cri-tools/releases/download/$CRICTL_VERSION/crictl-$CRICTL_VERSION-linux-amd64.tar.gz"
@@ -253,9 +253,27 @@ timeout: 10
 debug: false
 CRICTL_CONFIG
 
+curl -fsSL "https://pkgs.k8s.io/core:/stable:/$KUBERNETES_MINOR_VERSION/deb/Release.key" \
+  | gpg --dearmor --batch --yes -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+chmod a+r /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+echo \
+  "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/$KUBERNETES_MINOR_VERSION/deb/ /" \
+  >/etc/apt/sources.list.d/kubernetes.list
+
+apt-get update -y
+apt-get install -y kubelet kubeadm kubectl
+apt-mark hold kubelet kubeadm kubectl
+
+systemctl enable --now kubelet
+
 containerd --version
 crictl --version
 crictl info
+kubeadm version
+kubelet --version
+kubectl version --client=true
 EOF
 
   root_block_device {
