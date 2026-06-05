@@ -13,15 +13,18 @@ It currently contains two practice components:
   <img src="figures/environment_setup_diagram.svg" alt="Diagram showing local machine connecting to three AWS EC2 instances used as Kubernetes nodes.">
 </p>
 
-The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes control plane node and worker nodes. Terraform defines the AWS infrastructure, while the helper scripts handle the setup and teardown workflow. The scripts install `containerd` and `crictl` on each node, but intentionally omit Kubernetes installation steps to support cluster setup practice.
+The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes control plane node and worker nodes. Terraform defines the AWS infrastructure, while the helper scripts handle the setup and teardown workflow.
 
-`build_lab.sh`
-- Provisions the AWS resources with Terraform
-- Installs `containerd` and `crictl` on each node
-- Prepares SSH access
-- Opens terminals to the nodes
+### **`build_lab.sh`**
 
-`destroy_lab.sh`
+* Provisions the AWS resources with Terraform
+* Installs `containerd`, `crictl`, `kubeadm`, `kubelet`, and `kubectl` on each node
+* Prepares SSH access
+* Opens terminals to the nodes
+
+After `build_lab.sh` has finished, the EC2 instances are ready for Kubernetes bootstrap, but the cluster has not been initialized yet. This is intentional: `kubeadm init`, CNI installation, `kubeadm join`, and local kubeconfig setup are left as manual practice steps.
+
+### **`destroy_lab.sh`**
 - Removes the AWS resources
 - Cleans up local connection files
 
