@@ -30,20 +30,6 @@ locals {
 
 
 # -----------------------------------------------------------------------------
-# State migration
-# -----------------------------------------------------------------------------
-# Keeps the previous single worker instance when upgrading from the old
-# two-node lab. Terraform will treat aws_instance.node["worker"] as
-# aws_instance.node["worker-a"] instead of destroying it only because the
-# name changed.
-
-moved {
-  from = aws_instance.node["worker"]
-  to   = aws_instance.node["worker-a"]
-}
-
-
-# -----------------------------------------------------------------------------
 # Ubuntu AMI
 # -----------------------------------------------------------------------------
 
