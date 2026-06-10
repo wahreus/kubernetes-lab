@@ -243,7 +243,7 @@ worker-a        Ready    <none>          ...   ...
 worker-b        Ready    <none>          ...   ...
 ```
 
-## Destroy the lab
+## 7. Destroy the lab
 
 When finished, destroy the AWS resources to avoid unnecessary cost:
 
@@ -251,3 +251,30 @@ When finished, destroy the AWS resources to avoid unnecessary cost:
 cd environment_setup
 ./destroy_lab.sh
 ```
+
+## Commands practiced
+
+```text
+kubeadm init
+kubeadm token create --print-join-command
+kubeadm join
+kubectl get nodes
+kubectl get pods -A
+kubectl apply
+kubectl create deployment
+kubectl get pods -o wide
+kubectl expose deployment
+kubectl get svc
+kubectl delete svc
+kubectl delete deployment
+```
+
+## Summary
+
+This guide showed how to initialize a Kubernetes cluster on three AWS EC2 instances using `kubeadm`.
+
+The control-plane node was initialized with the private IP as the internal cluster endpoint. The public IP was added to the API server certificate so that `kubectl` could connect from the local machine. Calico was then installed as the CNI plugin using the `192.168.0.0/16` Pod network CIDR.
+
+After the control plane was ready, the worker nodes joined the cluster through the control-plane private IP. A simple NGINX Deployment and NodePort Service were used to verify that workloads could run on the cluster and be reached externally through a worker node public IP.
+
+Finally, the kubeconfig was copied from the control-plane node to the local machine and updated to use the control-plane public IP, allowing the cluster to be managed locally with `kubectl`.
