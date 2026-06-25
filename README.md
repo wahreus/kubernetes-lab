@@ -1,6 +1,6 @@
 # ⎈ Kubernetes Lab
 
-A Kubernetes practice repo built in preparation for the Certified Kubernetes Administrator (CKA) exam, focused on workloads, networking, storage, RBAC, scheduling, and troubleshooting.
+A hands-on Kubernetes lab for practicing cluster administration, networking, scheduling, RBAC, storage, and troubleshooting on AWS EC2.
 
 It currently contains two practice components:
 
