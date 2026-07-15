@@ -13,20 +13,28 @@ It currently contains two practice components:
   <img src="figures/environment_setup_diagram.svg" alt="Diagram showing local machine connecting to three AWS EC2 instances used as Kubernetes nodes.">
 </p>
 
-The lab uses local `kubectl` with remote AWS EC2 instances for the Kubernetes control plane node and worker nodes. Terraform defines the AWS infrastructure, while the helper scripts handle the setup and teardown workflow.
+The lab uses three AWS EC2 instances: one Kubernetes control-plane node and two worker nodes. Terraform defines the AWS infrastructure, while the helper scripts handle provisioning, SSH access, verification, connection, and teardown.
 
 ### build_lab.sh
 
 * Provisions the AWS resources with Terraform
 * Installs `containerd`, `crictl`, `kubeadm`, `kubelet`, and `kubectl` on each node
 * Prepares SSH access
-* Opens terminals to the nodes
+* Waits for cloud-init to finish and verifies the required tools
+* Optionally opens terminals to the nodes
 
 After `build_lab.sh` has finished, the EC2 instances are ready for Kubernetes bootstrap, but the cluster has not been initialized yet. This is intentional: `kubeadm init`, CNI installation, `kubeadm join`, and local kubeconfig setup are left as manual practice steps.
 
+### connect_lab.sh
+
+- Opens SSH terminals to all three nodes on macOS
+- Prints the SSH commands on other systems
+
 ### destroy_lab.sh
+
 - Removes the AWS resources
-- Cleans up local connection files
+- Verifies that Terraform no longer tracks any resources
+- Cleans up generated local connection, variable, and state files
 
 > **Note:** EC2 instances incur hourly costs. Always run `destroy_lab.sh` when you are finished with a practice session to avoid unnecessary charges.
 
@@ -35,6 +43,7 @@ After `build_lab.sh` has finished, the EC2 instances are ready for Kubernetes bo
 - AWS account with EC2 and VPC permissions
 - AWS CLI configured
 - Terraform installed
+- `curl` and an OpenSSH client installed
 - Ed25519 SSH key pair available for EC2 access
 - `kubectl` installed
 
@@ -42,7 +51,7 @@ After `build_lab.sh` has finished, the EC2 instances are ready for Kubernetes bo
 
 KubeRun is a command-speed game for Kubernetes and CKA practice. It helps you build speed with common `kubectl` and `kubeadm` commands for administration, troubleshooting, node maintenance, RBAC checks, and cluster setup.
 
-You are shown task descriptions in a randomized order, and the goal is to type as many correct commands as possible within 5 minutes. No commands are executed, KubeRun is only for practice. The game covers 35 common Kubernetes and CKA-style commands for:
+You are shown task descriptions in a randomized order, and the goal is to type as many correct commands as possible within the time limit. No commands are executed, KubeRun is only for practice. The game covers 35 common Kubernetes and CKA-style commands for:
 
 - inspecting and troubleshooting resources
 - applying and editing resources
