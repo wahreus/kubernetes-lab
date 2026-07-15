@@ -16,6 +16,9 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
+__pycache__/
+*.py[cod]
+
 ssh_config
 lab_hosts.txt
 .known_hosts
