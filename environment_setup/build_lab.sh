@@ -95,19 +95,6 @@ echo "Using AWS account: $AWS_ACCOUNT_ID"
 write_string_variable "ssh_public_key" "$PUBLIC_KEY_CONTENT"
 write_string_variable "allowed_access_cidr" "$ACCESS_CIDR"
 
-# Terraform owns the defaults. These values are written only when the caller
-# explicitly supplies an environment-variable override.
-[[ -n "${AWS_REGION:-}" ]] && write_string_variable "aws_region" "$AWS_REGION"
-[[ -n "${NAME_PREFIX:-}" ]] && write_string_variable "name_prefix" "$NAME_PREFIX"
-[[ -n "${CONTROL_PLANE_INSTANCE_TYPE:-}" ]] && \
-  write_string_variable "control_plane_instance_type" "$CONTROL_PLANE_INSTANCE_TYPE"
-[[ -n "${WORKER_INSTANCE_TYPE:-}" ]] && \
-  write_string_variable "worker_instance_type" "$WORKER_INSTANCE_TYPE"
-[[ -n "${ROOT_VOLUME_SIZE:-}" ]] && write_number_variable "root_volume_size" "$ROOT_VOLUME_SIZE"
-[[ -n "${KUBERNETES_MINOR_VERSION:-}" ]] && \
-  write_string_variable "kubernetes_minor_version" "$KUBERNETES_MINOR_VERSION"
-[[ -n "${CRICTL_VERSION:-}" ]] && write_string_variable "crictl_version" "$CRICTL_VERSION"
-
 terraform fmt "$TFVARS_FILE" >/dev/null
 
 echo
