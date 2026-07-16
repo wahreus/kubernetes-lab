@@ -1,4 +1,4 @@
-# Cluster setup
+# Cluster setup (with Calico CNI)
 
 Initialize the Kubernetes control plane, install the Calico CNI, join the worker nodes, and verify the cluster.
 
