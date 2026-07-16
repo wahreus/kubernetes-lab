@@ -91,7 +91,7 @@ sudo kubeadm token create --print-join-command
 
 Run the resulting command with `sudo` on both **worker-a** and **worker-b** nodes.
 
-# 5. Verify the cluster
+## 5. Verify the cluster
 
 On the control-plane node, check the Calico status:
 
