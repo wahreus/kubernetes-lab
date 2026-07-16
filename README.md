@@ -4,7 +4,7 @@ A hands-on Kubernetes lab for practicing cluster administration, networking, sch
 
 It currently contains two practice components:
 
-- An EC2-based Kubernetes lab environment for hands-on practice
+- An EC2-based Kubernetes lab environment with complementary runbooks for hands-on practice
 - KubeRun, a command-speed practice game
 
 ## Environment setup
