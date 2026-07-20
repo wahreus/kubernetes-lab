@@ -66,11 +66,25 @@ kubectl create -f \
   "https://raw.githubusercontent.com/projectcalico/calico/${CALICO_VERSION}/manifests/tigera-operator.yaml"
 ```
 
-Configure the Calico installation:
+Download the Calico installation configuration:
 
 ```bash
-kubectl create -f \
+curl -fsSLo custom-resources.yaml \
   "https://raw.githubusercontent.com/projectcalico/calico/${CALICO_VERSION}/manifests/custom-resources.yaml"
+```
+
+Configure Calico to use VXLAN encapsulation for all inter-node Pod traffic:
+
+```bash
+sed -i \
+  's/encapsulation: VXLANCrossSubnet/encapsulation: VXLAN/' \
+  custom-resources.yaml
+```
+
+Apply the Calico installation configuration:
+
+```bash
+kubectl create -f custom-resources.yaml
 ```
 
 Verify that the Calico Pods are running:
@@ -79,7 +93,8 @@ Verify that the Calico Pods are running:
 kubectl get pods -n calico-system
 ```
 
-At this stage, a `calico-node` Pod should report `Running` on the control-plane node. Additional Pods will later be created when the worker nodes join the cluster.
+At this stage, a `calico-node` Pod should report `Running` on the control-plane node. Additional Pods will be created when the worker nodes join the cluster.
+
 
 ## 4. Join the worker nodes
 
