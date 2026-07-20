@@ -21,4 +21,6 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 | **Windows workers**        | Supported with limitations                         | Not supported                                              |
 | **Kernel flexibility**     | Can use non-eBPF dataplanes                        | Requires a modern Linux kernel                             |
 
-Additional runbooks will be added as the lab expands.
+## Workload management
+
+- [Deploy and expose a workload](01-deploy_and_expose_workload)
