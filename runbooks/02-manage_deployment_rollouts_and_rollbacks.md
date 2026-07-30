@@ -5,7 +5,7 @@ Create a Deployment, update its container image, inspect the rollout history, an
 ## Prerequisites
 
 * A Kubernetes cluster has been initialized.
-* A CNI (Calico or Clilium) has been installed.
+* A CNI (Calico or Cilium) has been installed.
 
 Run all commands on the control-plane node unless otherwise specified.
 
