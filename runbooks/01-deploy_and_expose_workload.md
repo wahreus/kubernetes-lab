@@ -157,10 +157,15 @@ kubectl get endpointslices -n workloads -l kubernetes.io/service-name=web
 
 The EndpointSlice should contain the IP addresses of both NGINX Pods. An EndpointSlice records the network endpoints selected by a Service, allowing Kubernetes to route Service traffic to the correct Pods efficiently.
 
-Inspect the Service selector and Pod labels:
+Inspect the Service selector:
 
 ```bash
-kubectl get service web -n workloads -o jsonpath='{.spec.selector}{"\n"}'
+kubectl describe service web -n workloads
+```
+
+Inspect the Pod labels:
+
+```bash
 kubectl get pods -n workloads --show-labels
 ```
 
@@ -265,15 +270,13 @@ kubectl get service web -n workloads
 
 The Service should report `TYPE=NodePort`. Kubernetes automatically assigns a port from the default NodePort range of `30000-32767`.
 
-Retrieve the assigned port:
+Find the assigned port in the `PORT(S)` column:
 
 ```bash
-NODE_PORT="$(kubectl get service web \
-  -n workloads \
-  -o jsonpath='{.spec.ports[0].nodePort}')"
-
-echo "$NODE_PORT"
+kubectl get service web -n workloads
 ```
+
+For example, `80:31234/TCP` means that the assigned NodePort is `31234`.
 
 NodePort is available on every cluster node. On your **local machine**, open another terminal in the repository root and find a worker node's public IP:
 
@@ -352,9 +355,7 @@ Inspect the external Service configuration:
 
 ```bash
 kubectl get service web -n workloads -o wide
-kubectl get service web \
-  -n workloads \
-  -o jsonpath='{.spec.type}{" "}{.spec.ports[0].nodePort}{"\n"}'
+kubectl describe service web -n workloads
 ```
 
 If external access fails:
