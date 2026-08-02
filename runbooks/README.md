@@ -31,3 +31,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 ## Configuration
 
 - [Configure workloads with ConfigMaps and Secrets](05-configure_workloads_with_configmaps_and_secrets.md)
+
+## Scheduling
+
+- [Control Pod scheduling](06-control_pod_scheduling.md)
