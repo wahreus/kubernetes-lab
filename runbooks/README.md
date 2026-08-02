@@ -23,7 +23,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 
 ## Workload management
 
-- [Deploy and expose a workload](01-deploy_and_expose_workload)
+- [Deploy and expose a workload](01-deploy_and_expose_workload.md)
 - [Manage Deployment rollouts and rollbacks](02-manage_deployment_rollouts_and_rollbacks.md)
 - [Configure workload resource requests and limits](03-configure_workload_resource_requests_and_limits.md)
 - [Run a one-off batch Job](04-run_a_one-off_batch_job.md)
