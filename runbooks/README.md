@@ -39,3 +39,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 ## Access control
 
 - [Control namespace access with RBAC](07-control_namespace_access_with_rbac.md)
+
+## Storage
+
+- [Provision persistent storage](08-provision_persistent_storage.md)
