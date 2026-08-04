@@ -4,10 +4,10 @@ Configure CPU and memory requests and limits for a Deployment, inspect how Kuber
 
 ## Prerequisites
 
-* A Kubernetes cluster has been initialized.
-* A CNI (Calico or Cilium) has been installed.
+* The Kubernetes cluster has been initialized.
+* A CNI has been installed.
 
-Run all commands on the control-plane node unless otherwise specified.
+Run all commands on the **control-plane node** unless otherwise specified.
 
 ## 1. Verify the cluster
 

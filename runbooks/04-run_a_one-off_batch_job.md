@@ -4,12 +4,10 @@ Create a Kubernetes Job, wait for it to complete, inspect its Pod and logs, and 
 
 ## Prerequisites
 
-* The Kubernetes cluster has been initialized using either cluster setup runbook.
+* The Kubernetes cluster has been initialized.
 * A CNI has been installed.
 
-This runbook is independent of the other workload-management runbooks.
-
-Run all commands on the control-plane node unless otherwise specified.
+Run all commands on the **control-plane node** unless otherwise specified.
 
 ## 1. Verify the cluster
 
