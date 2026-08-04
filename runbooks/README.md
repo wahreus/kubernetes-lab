@@ -43,3 +43,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 ## Storage
 
 - [Provision persistent storage](08-provision_persistent_storage.md)
+
+## Networking and security
+
+- [Enforce network isolation](09-enforce_network_isolation.md)
