@@ -35,3 +35,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 ## Scheduling
 
 - [Control Pod scheduling](06-control_pod_scheduling.md)
+
+## Access control
+
+- [Control namespace access with RBAC](07-control_namespace_access_with_rbac.md)
