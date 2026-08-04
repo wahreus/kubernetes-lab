@@ -2,10 +2,21 @@
 
 A hands-on Kubernetes lab for practicing cluster administration, networking, scheduling, RBAC, storage, and troubleshooting on AWS EC2.
 
-It currently contains two practice components:
+The repository contains two main practice components:
 
-- An EC2-based Kubernetes lab environment with complementary runbooks for hands-on practice
+- An EC2-based Kubernetes environment with step-by-step runbooks
 - KubeRun, a command-speed practice game
+
+## Practice runbooks
+
+The repository currently includes 11 hands-on runbooks covering:
+
+- Cluster setup with Calico or Cilium
+- Deployments, rollouts, resource management, and Jobs
+- ConfigMaps and Secrets
+- Scheduling, RBAC, persistent storage, and NetworkPolicies
+
+[View all runbooks](runbooks/README.md)
 
 ## Environment setup
 
