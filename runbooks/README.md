@@ -35,6 +35,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 ## Scheduling
 
 - [Control Pod scheduling](06-control_pod_scheduling.md)
+- [Cordon and drain a worker node](11-cordon_and_drain_a_worker_node.md)
 
 ## Access control
 
