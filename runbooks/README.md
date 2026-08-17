@@ -47,3 +47,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 ## Networking and security
 
 - [Enforce network isolation](09-enforce_network_isolation.md)
+
+## Troubleshooting
+
+- [Troubleshoot failing workloads](10-troubleshoot_failing_workloads.md)
