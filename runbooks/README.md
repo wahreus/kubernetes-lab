@@ -52,3 +52,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 ## Troubleshooting
 
 - [Troubleshoot failing workloads](10-troubleshoot_failing_workloads.md)
+
+## Cluster Administration
+
+- [Back up and restore etcd](12-back_up_and_restore_etcd.md)
