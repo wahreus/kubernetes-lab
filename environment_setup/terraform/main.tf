@@ -178,9 +178,10 @@ resource "aws_instance" "node" {
   user_data_replace_on_change = true
 
   user_data = templatefile("${path.module}/templates/node_bootstrap.sh.tftpl", {
-    hostname                 = each.key
-    crictl_version           = var.crictl_version
-    kubernetes_minor_version = var.kubernetes_minor_version
+  hostname                   = each.key
+  crictl_version             = var.crictl_version
+  kubernetes_minor_version   = var.kubernetes_minor_version
+  install_docker             = each.value.role == "control-plane"
   })
 
   metadata_options {

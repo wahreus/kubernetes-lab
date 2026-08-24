@@ -30,6 +30,7 @@ The lab uses three AWS EC2 instances: one Kubernetes control-plane node and two 
 
 * Provisions the AWS resources with Terraform
 * Installs `containerd`, `crictl`, `kubeadm`, `kubelet`, and `kubectl` on each node
+* Installs Docker Engine on the control-plane node for container image development; Kubernetes continues to use containerd directly
 * Prepares SSH access
 * Waits for cloud-init to finish and verifies the required tools
 * Optionally opens terminals to the nodes
@@ -56,7 +57,6 @@ After `build_lab.sh` has finished, the EC2 instances are ready for Kubernetes bo
 - Terraform installed
 - `curl` and an OpenSSH client installed
 - Ed25519 SSH key pair available for EC2 access
-- `kubectl` installed
 
 ## KubeRun
 

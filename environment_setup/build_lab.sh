@@ -250,6 +250,16 @@ verify_node_tools() {
     "command -v containerd crictl kubeadm kubelet kubectl >/dev/null && sudo systemctl is-active --quiet containerd"
 }
 
+verify_control_plane_docker() {
+    echo "Verifying Docker on k8s-control-plane..."
+    ssh -F "$ROOT_DIR/ssh_config" \
+        -o BatchMode=yes \
+        k8s-control-plane \
+        "command -v docker >/dev/null &&
+         sudo systemctl is-active --quiet docker &&
+         sudo grep -Fxq 'runtime-endpoint: unix:///run/containerd/containerd.sock' /etc/crictl.yaml"
+}
+
 for host in k8s-control-plane k8s-worker-a k8s-worker-b; do
   wait_for_ssh "$host"
 done
@@ -258,6 +268,8 @@ for host in k8s-control-plane k8s-worker-a k8s-worker-b; do
   wait_for_cloud_init "$host"
   verify_node_tools "$host"
 done
+
+verify_control_plane_docker
 
 echo
 echo "Lab is ready. Details written to:"

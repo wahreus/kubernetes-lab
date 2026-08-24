@@ -62,6 +62,26 @@ sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.to
 systemctl enable --now containerd
 systemctl restart containerd
 
+%{ if install_docker ~}
+# Docker Engine is installed only on the control-plane node.
+# Kubernetes continues to use the system containerd CRI runtime directly.
+install -m 0755 -d /etc/docker
+
+cat >/etc/docker/daemon.json <<'DOCKER_CONFIG'
+{
+  "ip-forward-no-drop": true
+}
+DOCKER_CONFIG
+
+apt-get install -y \
+  docker-ce \
+  docker-ce-cli \
+  docker-buildx-plugin \
+  docker-compose-plugin
+
+systemctl enable --now docker
+%{ endif ~}
+
 curl -fsSLo /tmp/crictl.tar.gz \
   "https://github.com/kubernetes-sigs/cri-tools/releases/download/$CRICTL_VERSION/crictl-$CRICTL_VERSION-linux-amd64.tar.gz"
 
