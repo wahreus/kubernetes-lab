@@ -8,6 +8,8 @@ Build a small OCI-compatible container image, inspect it, update it, import it i
 * A CNI has been installed.
 * Docker is available on the machine where the image is built.
 
+Run all commands on the **control-plane node** unless otherwise specified.
+
 ## 1. Verify the image builder
 
 Check that the image builder is available:
