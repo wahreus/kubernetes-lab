@@ -108,6 +108,14 @@ apt-get update -y
 apt-get install -y kubelet kubeadm kubectl
 apt-mark hold kubelet kubeadm kubectl
 systemctl enable --now kubelet
+%{ if install_helm ~}
+# Install the latest stable Helm 4 release on the control-plane node.
+curl -fsSL -o /tmp/get_helm.sh \
+  https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 /tmp/get_helm.sh
+/tmp/get_helm.sh --no-sudo
+rm -f /tmp/get_helm.sh
+%{ endif ~}
 
 cat >>/home/ubuntu/.bashrc <<'BASHRC'
 
@@ -124,3 +132,6 @@ crictl info
 kubeadm version
 kubelet --version
 kubectl version --client=true
+%{ if install_helm ~}
+helm version --short
+%{ endif ~}

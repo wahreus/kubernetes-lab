@@ -6,7 +6,6 @@ The repository contains two main practice components:
 
 - An EC2-based Kubernetes environment with step-by-step runbooks
 - KubeRun, a command-speed practice game
-
 ## Practice runbooks
 
 The repository currently includes 11 hands-on runbooks covering:
@@ -31,6 +30,7 @@ The lab uses three AWS EC2 instances: one Kubernetes control-plane node and two 
 * Provisions the AWS resources with Terraform
 * Installs `containerd`, `crictl`, `kubeadm`, `kubelet`, and `kubectl` on each node
 * Installs Docker Engine on the control-plane node for container image development; Kubernetes continues to use containerd directly
+* Installs the latest stable Helm release on the control-plane node
 * Prepares SSH access
 * Waits for cloud-init to finish and verifies the required tools
 * Optionally opens terminals to the nodes
@@ -76,7 +76,6 @@ You are shown task descriptions in a randomized order, and the goal is to type a
 - checking permissions
 - maintaining nodes with drain, cordon, uncordon, taints, and labels
 - managing cluster lifecycle with `kubeadm`
-
 
 > **Disclaimer:** KubeRun is an independently developed practice tool and is not affiliated with CNCF, The Linux Foundation, or the Kubernetes project. It is intended for command-recall practice only and does not cover the full CKA curriculum.
 

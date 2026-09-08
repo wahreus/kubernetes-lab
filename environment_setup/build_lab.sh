@@ -251,13 +251,20 @@ verify_node_tools() {
 }
 
 verify_control_plane_docker() {
-    echo "Verifying Docker on k8s-control-plane..."
-    ssh -F "$ROOT_DIR/ssh_config" \
-        -o BatchMode=yes \
-        k8s-control-plane \
-        "command -v docker >/dev/null &&
-         sudo systemctl is-active --quiet docker &&
-         sudo grep -Fxq 'runtime-endpoint: unix:///run/containerd/containerd.sock' /etc/crictl.yaml"
+  echo "Verifying Docker on k8s-control-plane..."
+  ssh -F "$ROOT_DIR/ssh_config" \
+    -o BatchMode=yes \
+    k8s-control-plane \
+    "command -v docker >/dev/null &&
+     sudo systemctl is-active --quiet docker &&
+     sudo grep -Fxq 'runtime-endpoint: unix:///run/containerd/containerd.sock' /etc/crictl.yaml"
+}
+verify_control_plane_helm() {
+  echo "Verifying Helm on k8s-control-plane..."
+  ssh -F "$ROOT_DIR/ssh_config" \
+    -o BatchMode=yes \
+    k8s-control-plane \
+    "command -v helm >/dev/null && helm version --short"
 }
 
 for host in k8s-control-plane k8s-worker-a k8s-worker-b; do
@@ -270,6 +277,7 @@ for host in k8s-control-plane k8s-worker-a k8s-worker-b; do
 done
 
 verify_control_plane_docker
+verify_control_plane_helm
 
 echo
 echo "Lab is ready. Details written to:"
