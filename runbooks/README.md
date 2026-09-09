@@ -29,6 +29,7 @@ Both Calico and Cilium provide Kubernetes networking and policy enforcement, but
 - [Run a one-off batch Job](04-run_a_one-off_batch_job.md)
 - [Build and modify container images](13-build_and_modify_container_images.md)
 - [Implement blue-green and canary deployments](14-implement_blue_green_and_canary_deployments.md)
+- [Deploy applications with Helm](15-deploy_applications_with_helm.md)
 
 ## Configuration
 
